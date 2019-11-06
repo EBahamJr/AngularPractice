@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { isNgTemplate } from '@angular/compiler';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
   //{providedIn: 'root'}
