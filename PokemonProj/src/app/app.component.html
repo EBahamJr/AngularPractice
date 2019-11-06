@@ -1,1 +1,26 @@
 <h1>{{title}}</h1>
+
+
+<hr>
+
+<div class = "pokedex">
+    <div class = "pokedex-pokemon" *ngFor="Let p of Pokemon">
+        <div class="pokedex-pokeon-id">
+            #{{p.id}}
+        </div>
+        <img [ngClass]="{'hidden':!p.imageLoaded}" class="pokedex-pokemon-sprite" (load)="p.imageLoaded = true" [attr.src]="p.sprite">
+        <div class = "pokedex-pokemon-name">
+            {{p.name | capitalize}}
+        </div>
+    </div>
+</div>
+
+<button class = "load-button">
+    <span *ngIf= "!error">
+        <span *ngIf = "isLoading"> Loading. . .</span>
+        <span *ngIf = "!isLoading">Load more</span>
+    </span>
+    <span *ngIf="error">
+        Loading Failed
+    </span>
+</button>
