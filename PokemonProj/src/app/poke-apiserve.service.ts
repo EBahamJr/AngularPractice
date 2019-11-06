@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { isNgTemplate } from '@angular/compiler';
-import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs';
 
 @Injectable()
   //{providedIn: 'root'}
 export class PokeAPIserveService {
+  
   private baseUrl: string = 'https://pokeapi.co/api/v2/pokemon/';
   private baseSpriteUrl: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
+  
 
-  constructor(private http: Http) { }
+  constructor(private httpClient: HttpClient) { }
 
   getPokemon(offset: number, limit: number){
-    return this.http.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
+    return this.httpClient.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
       .toPromise()
       .then(response => response.json().results)
       .then(items => items.map((item, idx) => {
