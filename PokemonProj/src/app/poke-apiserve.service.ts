@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isNgTemplate } from '@angular/compiler';
-import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { Pokemon } from './Pokemon';
+
 
 @Injectable()
   //{providedIn: 'root'}
@@ -11,20 +14,24 @@ export class PokeAPIserveService {
   private baseSpriteUrl: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
   
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getPokemon(offset: number, limit: number){
-    return this.httpClient.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
-      .toPromise()
-      .then(response => response.json().results)
+  getPokemon(offset: number, limit: number): Observable<Pokemon>{
+    let httpRes = this.http.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`);
+      .map( res => {
+        let results = res.json().results.map(item)
+      });
+    return
+
+      /*.then(response => response.json().results)
       .then(items => items.map((item, idx) => {
         const id: number = idx + offset + 1;
 
         return{
           name: item.name,
           sprite: `${this.baseSpriteUrl}${id}.png`,
-          id
+          id: 12
         };
-      }));
+      }));*/
   }
 }
