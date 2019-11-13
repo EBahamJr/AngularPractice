@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { isNgTemplate } from '@angular/compiler';
 import { map } from 'rxjs/operators'; 
 import { Observable, observable } from 'rxjs';
-import { Pokemon } from './Pokemon';
+import { Pokemon } from '../models/Pokemon';
 
 
 @Injectable()

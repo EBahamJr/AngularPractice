@@ -4,20 +4,20 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokeAPIserveService } from './poke-apiserve.service';
-import { CapitalizePipe } from './capitalize.pipe';
+import { PokeAPIserveService } from './services/poke-apiserve.service';
+import { CapitalizePipe } from './services/capitalize.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CapitalizePipe
+    CapitalizePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
   ],
-  providers: [PokeAPIserveService],
+  // providers: [PokeAPIserveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
