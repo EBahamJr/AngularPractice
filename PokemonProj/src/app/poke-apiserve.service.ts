@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isNgTemplate } from '@angular/compiler';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'; 
+import { Observable, observable } from 'rxjs';
 import { Pokemon } from './Pokemon';
 
 
@@ -16,14 +16,12 @@ export class PokeAPIserveService {
 
   constructor(private http: HttpClient) { }
 
-  getPokemon(offset: number, limit: number): Observable<Pokemon>{
-    let httpRes = this.http.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`);
-      .map( res => {
-        let results = res.json().results.map(item)
-      });
-    return
-
-      /*.then(response => response.json().results)
+  getPokemon(offset: number, limit: number){
+    let apiURL = `${this.baseUrl}?offset=${offset}&limit=${limit}`;
+    let pokeson = this.http.get(apiURL)
+    .pipe(map( res => res));
+    return pokeson;
+    /*.then(response => response.json().results)
       .then(items => items.map((item, idx) => {
         const id: number = idx + offset + 1;
 

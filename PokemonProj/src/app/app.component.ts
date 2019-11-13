@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { PokeAPIserveService } from './poke-apiserve.service';
 //pokemon component
 import {Pokemon} from './Pokemon';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,10 @@ export class AppComponent {
     //use service to load the next 9 mons
     this.pokedexService.getPokemon(this.pokemon.length, 9)
     //loading the next 9 pokemon, then putting them in the list.
-      .then(pokemon => {
+    .subscribe((data: any)=> {
+      console.log(data);
+    });
+      /*.then(pokemon => {
         pokemon = pokemon.map(p => {
           //defaults to false, to avoid loading on screen immediately(looks weird otherwise)
           p.imageLoaded = false;
@@ -37,7 +41,7 @@ export class AppComponent {
         this.pokemon = this.pokemon.concat(pokemon);
         this.isLoading = false;
         this.error = false;
-      })
+      })*/
     this.error = true;
     this.isLoading = false;
   }
