@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 //poke-api service
-import { PokeAPIserveService } from './poke-apiserve.service';
+//import { PokeAPIserveService } from './poke-apiserve.service';
 //pokemon component
-import {Pokemon} from './Pokemon';
+import {Pokemon} from './models/Pokemon';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   isLoading: boolean = false;
   error: boolean = false;
 
-  constructor(private pokedexService: PokeAPIserveService){}
+  constructor(){}
+  //constructor(private pokedexService: PokeAPIserveService){}
   //activate on initialization (whenever this component is created, it will load 9 more pokemon.)
   ngOnInit(){
     this.loadMore();
@@ -25,9 +27,12 @@ export class AppComponent {
   loadMore() {
     this.isLoading = true;
     //use service to load the next 9 mons
-    this.pokedexService.getPokemon(this.pokemon.length, 9)
+    // this.pokedexService.getPokemon(this.pokemon.length, 9)
     //loading the next 9 pokemon, then putting them in the list.
-      .then(pokemon => {
+    // .subscribe((data: any)=> {
+    //   console.log(data);
+    // });
+      /*.then(pokemon => {
         pokemon = pokemon.map(p => {
           //defaults to false, to avoid loading on screen immediately(looks weird otherwise)
           p.imageLoaded = false;
@@ -37,7 +42,7 @@ export class AppComponent {
         this.pokemon = this.pokemon.concat(pokemon);
         this.isLoading = false;
         this.error = false;
-      })
+      })*/
     this.error = true;
     this.isLoading = false;
   }
